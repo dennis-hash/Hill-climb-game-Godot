@@ -1,0 +1,71 @@
+[gd_scene load_steps=7 format=3 uid="uid://dhwiamm1thg8x"]
+
+[ext_resource type="Script" path="res://Code/player.gd" id="1_6rqmj"]
+[ext_resource type="Texture2D" uid="uid://fvamsyqcysli" path="res://Images/Characters/Body.png" id="2_143wf"]
+[ext_resource type="Texture2D" uid="uid://ds68qy74l48t8" path="res://Images/Car/Car.png" id="2_cqli1"]
+[ext_resource type="PackedScene" uid="uid://bwp7fj4gcsh2a" path="res://Scenes/wheel.tscn" id="3_kkhti"]
+[ext_resource type="Texture2D" uid="uid://xj3ycg3vdurk" path="res://Images/Characters/Head.png" id="5_40wek"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_je7hx"]
+radius = 52.0
+
+[node name="Player" type="RigidBody2D" groups=["Player"]]
+position = Vector2(-1, 0)
+script = ExtResource("1_6rqmj")
+
+[node name="neck" type="Sprite2D" parent="."]
+position = Vector2(-42, -52)
+texture = ExtResource("2_143wf")
+
+[node name="head" type="RigidBody2D" parent="." groups=["Player"]]
+position = Vector2(-17, -53)
+mass = 0.13
+
+[node name="Sprite2D" type="Sprite2D" parent="head"]
+position = Vector2(-28.25, -23.25)
+scale = Vector2(0.666016, 0.666016)
+texture = ExtResource("5_40wek")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="head"]
+position = Vector2(-25, -22)
+shape = SubResource("CircleShape2D_je7hx")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="head"]
+visible = false
+position = Vector2(-14, 3)
+node_a = NodePath("..")
+node_b = NodePath("../..")
+softness = 2.22
+
+[node name="PinJoint2D2" type="PinJoint2D" parent="head"]
+position = Vector2(-28, 5)
+node_a = NodePath("../..")
+node_b = NodePath("..")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, 1)
+scale = Vector2(0.69043, 0.867188)
+texture = ExtResource("2_cqli1")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-153, -33, -153, -33, -158, 87, -158, 87, 154, 89, 154, 89, 150, -5, 150, -5, 78, -40, 3, -50, 3, -50, -134, -50, -134, -50)
+
+[node name="Wheel" parent="." instance=ExtResource("3_kkhti")]
+position = Vector2(-103, 113)
+
+[node name="PinJoint2D2" type="PinJoint2D" parent="Wheel"]
+node_a = NodePath("../..")
+node_b = NodePath("..")
+
+[node name="Wheel2" parent="." instance=ExtResource("3_kkhti")]
+position = Vector2(79, 118)
+
+[node name="PinJoint2D2" type="PinJoint2D" parent="Wheel2"]
+node_a = NodePath("../..")
+node_b = NodePath("..")
+
+[node name="GameOverTimer" type="Timer" parent="."]
+wait_time = 5.769
+one_shot = true
+
+[connection signal="timeout" from="GameOverTimer" to="." method="_on_game_over_timer_timeout"]

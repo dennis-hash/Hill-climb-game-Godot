@@ -1,0 +1,68 @@
+[gd_scene load_steps=6 format=3 uid="uid://b0rby3arru2fv"]
+
+[ext_resource type="Texture2D" uid="uid://dpixv6u5xd2do" path="res://Images/Pickups/Coin5.png" id="1_5g6ny"]
+[ext_resource type="FontFile" uid="uid://ctdsk2jt7nbwr" path="res://Images/Characters/fredoka-one.one-regular.ttf" id="2_i8sgf"]
+[ext_resource type="Texture2D" uid="uid://dx7hufm4ee4cp" path="res://Images/Pickups/Fuel.png" id="3_22tai"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vnuja"]
+bg_color = Color(0, 0.0196078, 0.00392157, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 6.0
+expand_margin_top = 6.0
+expand_margin_right = 6.0
+expand_margin_bottom = 6.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xrj3g"]
+bg_color = Color(0.937255, 0.0705882, 0.121569, 1)
+corner_radius_top_left = 10
+corner_radius_bottom_left = 10
+
+[node name="UI" type="CanvasLayer"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = 2.0
+offset_top = 67.0
+offset_right = 67.0
+offset_bottom = 132.0
+texture = ExtResource("1_5g6ny")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="TextureRect"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 12.0
+offset_right = 130.0
+offset_bottom = 53.0
+theme_override_colors/font_color = Color(0.960784, 0.866667, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 7
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/font = ExtResource("2_i8sgf")
+theme_override_font_sizes/font_size = 30
+text = "0"
+
+[node name="FuelIndicator" type="TextureRect" parent="."]
+offset_left = 8.0
+offset_top = 13.0
+offset_right = 67.0
+offset_bottom = 72.0
+texture = ExtResource("3_22tai")
+expand_mode = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="FuelIndicator"]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 13.0
+offset_right = 306.0
+offset_bottom = 47.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_styles/background = SubResource("StyleBoxFlat_vnuja")
+theme_override_styles/fill = SubResource("StyleBoxFlat_xrj3g")
+rounded = true
+show_percentage = false
